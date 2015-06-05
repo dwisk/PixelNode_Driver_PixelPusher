@@ -1,0 +1,29 @@
+{
+  "name": "pixelnode-driver-pixelpusher",
+  "version": "0.0.1",
+  "description": "Pixel Driver for PixelPusher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwisk/PixelNode_Driver_PixelPusher.git"
+  },
+  "author": {
+    "name": "Amely Kling",
+    "email": "mail@dwi.sk",
+    "url": "http://dwi.sk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode_Driver_PixelPusher/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode_Driver_PixelPusher",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "pixelnode-driver": "0.0.x",
+    "pixelpusher": "0.1.1"
+  },
+
+}
