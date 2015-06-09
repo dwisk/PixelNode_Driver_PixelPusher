@@ -77,6 +77,13 @@ PixelNode_Driver_PixelPusher.prototype.init = function() {
 		// start the painter 
 		self.startPainter.call(self);
 
+		// on timeout
+		self.controller.on('timeout', function() {
+			console.log('PixelPusher timeout'.red);
+			self.strips = [];
+		});
+
+
 
 	}).on('error', function(err) {
 		console.log(('PixelPusher Error: ' + err.message).red);
