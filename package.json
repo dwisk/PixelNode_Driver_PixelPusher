@@ -1,6 +1,6 @@
 {
   "name": "pixelnode-driver-pixelpusher",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Pixel Driver for PixelPusher",
   "main": "index.js",
   "scripts": {
