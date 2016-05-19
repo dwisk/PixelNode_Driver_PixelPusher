@@ -1,6 +1,6 @@
 {
   "name": "pixelnode-driver-pixelpusher",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Pixel Driver for PixelPusher",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/dwisk/PixelNode_Driver_PixelPusher",
   "dependencies": {
     "colors": "^1.0.3",
-    "pixelnode-driver": "0.1.x",
-    "pixelpusher": "0.1.1"
+    "pixelnode-driver": "0.2.x",
+    "heroic-pixel-pusher": "0.2.4"
   }
 }
