@@ -22,7 +22,7 @@
   "homepage": "https://github.com/dwisk/PixelNode_Driver_PixelPusher",
   "dependencies": {
     "colors": "^1.0.3",
-    "pixelnode-driver": "0.1.x",
+    "pixelnode-driver": "0.2.x",
     "heroic-pixel-pusher": "0.2.4"
   }
 }
