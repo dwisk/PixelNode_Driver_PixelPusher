@@ -13,7 +13,7 @@
 /* Includes
  * ==================================================================================================================== */
 
-var PixelPusher = require('pixelpusher');
+var PixelPusher = require('heroic-pixel-pusher');
 var util = require("util");
 var colors = require('colors');
 
@@ -65,13 +65,16 @@ PixelNode_Driver_PixelPusher.prototype.init = function() {
 	new PixelPusher().on('discover', function(controller) {
 		// remember controller
 		self.controller = controller;
+		self.controller.params.pixelpusher.updatePeriod = self.options.delay;
 
 		// PixelPusher discovered
 		console.log('PixelPusher discovered: '.green + JSON.stringify(controller.params.pixelpusher).grey);
 		
 		// add strips (no logic for multiple pixelpushers yet)
 		for (var i = 0; i < controller.params.pixelpusher.numberStrips; i++) {
-			self.strips.push({ number:i, data: new Buffer(3 * self.controller.params.pixelpusher.pixelsPerStrip) });
+			strip = new PixelPusher.PixelStrip(i, self.controller.params.pixelpusher.pixelsPerStrip);
+			strip.i = i;
+			self.strips.push(strip);
 		}
 
 		// start the painter 
@@ -100,14 +103,17 @@ PixelNode_Driver_PixelPusher.prototype.setPixel = function(strip_num, id, r,g,b)
 		// get strip
 		var strip = self.strips[strip_num];
 
-		// set pixel data 
+		// create pixel data 
 		// - each data point one RGB value
 		// - gammatable for color correction
 		// - dimmer for general darkening (power save)
+		r2 = self.gammatable[	parseInt(r * self.options.dimmer)	];
+		g2 = self.gammatable[	parseInt(g * self.options.dimmer)	];
+		b2 = self.gammatable[	parseInt(b * self.options.dimmer)	];
 
-		strip.data[id*3] =   self.gammatable[	parseInt(r * self.options.dimmer)	];
-		strip.data[id*3+1] = self.gammatable[	parseInt(g * self.options.dimmer)	];
-		strip.data[id*3+2] = self.gammatable[	parseInt(b * self.options.dimmer)	];
+		// set pixel data
+		strip.getPixel(id).setColor(r2,g2,b2, self.options.dimmer);
+
 	}
 }
 
@@ -115,11 +121,12 @@ PixelNode_Driver_PixelPusher.prototype.setPixel = function(strip_num, id, r,g,b)
 // tells PixelPusher to write pixels
 PixelNode_Driver_PixelPusher.prototype.sendPixels = function() {
 	var self = this;
-
+	var strips_with_data = [];
 	// send each strip on its own to prevent to big udp-packagesize
-	self.strips.forEach(function(strip) {
-		self.controller.refresh([strip]);	
-	});
+	for (var i = self.strips.length - 1; i >= 0; i--) {
+		strips_with_data.push(self.strips[i].getStripData());
+	}
+	self.controller.refresh(strips_with_data);
 }
 
 
