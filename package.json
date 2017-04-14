@@ -23,6 +23,6 @@
   "dependencies": {
     "colors": "^1.0.3",
     "pixelnode-driver": "0.2.x",
-    "heroic-pixel-pusher": "0.2.4"
+    "heroic-pixel-pusher": "dwisk/node-pixelpusher"
   }
 }
